@@ -1,0 +1,42 @@
+"bundle list start============================================================== 
+"使用vim-plug管理.
+call plug#begin('~/.vim/plugged')
+
+"平滑滚动.
+'youchu/accelerated-smooth-scroll'
+
+"git改变记录与暂存. [c; ]c; ,hs; ,hu; ,hp;
+'airblade/vim-gitgutter'
+
+"目录树.
+'scrooloose/nerdtree'
+
+"文件及tag搜索.
+'ctrlpvim/ctrlp.vim'
+
+"目前最强的状态条.
+'vim-airline/vim-airline'
+call plug#end()
+"bundle list end================================================================ 
+
+"bundle setting start=========================================================== 
+"nerdtree----->
+"F2打开与关闭nerdtree.
+nnoremap <F2> :NERDTreeToggle<cr>
+"忽略*.pyc和*~
+let NERDTreeIgnore=['\.pyc$', '\~$']
+"只剩下NERDTree时自动关闭.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"<-----nerdtree
+
+"vim-airline----->
+"打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+"我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+"设置切换Buffer快捷键,值得商榷.
+nnoremap <c-n> :bn<CR>
+nnoremap <c-p> :bp<CR>
+"<-----vim-airline
+"bundle setting end============================================================= 
+
