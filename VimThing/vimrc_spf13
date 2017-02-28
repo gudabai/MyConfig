@@ -1,9 +1,6 @@
 " Environment {
 
     " Identify platform {
-        silent function! OSX()
-            return has('macunix')
-        endfunction
         silent function! LINUX()
             return has('unix') && !has('macunix') && !has('win32unix')
         endfunction
@@ -12,60 +9,7 @@
         endfunction
     " }
 
-    " Basics {
-        set nocompatible        " Must be first line
-        if !WINDOWS()
-            set shell=/bin/sh
-        endif
-    " }
-
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-        endif
-    " }
-    
-    " Arrow Key Fix {
-        " https://github.com/spf13/spf13-vim/issues/780
-        if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
-            inoremap <silent> <C-[>OC <RIGHT>
-        endif
-    " }
-
-" }
-
-" Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles"))
-        source ~/.vimrc.bundles
-    endif
-" }
-
 " General {
-
-    set background=dark         " Assume a dark background
-
-    " Allow to trigger background
-    function! ToggleBG()
-        let s:tbg = &background
-        " Inversion
-        if s:tbg == "dark"
-            set background=light
-        else
-            set background=dark
-        endif
-    endfunction
-    noremap <leader>bg :call ToggleBG()<CR>
-
-    " if !has('gui')
-        "set term=$TERM          " Make arrow and other keys work
-    " endif
-    filetype plugin indent on   " Automatically detect file types.
-    syntax on                   " Syntax highlighting
-    set mouse=a                 " Automatically enable mouse usage
-    set mousehide               " Hide the mouse cursor while typing
-    scriptencoding utf-8
 
     if has('clipboard')
         if has('unnamedplus')  " When possible use + register for copy-paste
@@ -151,7 +95,6 @@
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
 
-    set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
     highlight clear LineNr          " Current line number row will have same background color in relative mode
@@ -1038,8 +981,6 @@
         if !exists("g:spf13_no_big_font")
             if LINUX() && has("gui_running")
                 set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-            elseif OSX() && has("gui_running")
-                set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h11,Consolas\ Regular:h12,Courier\ New\ Regular:h14
             elseif WINDOWS() && has("gui_running")
                 "set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
                 set guifont=Andale_Mono:h12,Menlo:h12,Consolas:h12,Courier_New:h12

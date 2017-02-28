@@ -1,0 +1,162 @@
+    " Windows Compatible {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier.
+        if has('win32') || has('win64')
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+
+          " Be nice and check for multi_byte even if the config requires
+          " multi_byte support most of the time
+          if has("multi_byte")
+            " Windows cmd.exe still uses cp850. If Windows ever moved to
+            " Powershell as the primary terminal, this would be utf-8
+            set termencoding=cp850
+            " Let Vim use utf-8 internally, because many scripts require this
+            set encoding=utf-8
+            setglobal fileencoding=utf-8
+            " Windows has traditionally used cp1252, so it's probably wise to
+            " fallback into cp1252 instead of eg. iso-8859-15.
+            " Newer Windows files might contain utf-8 or utf-16 LE so we might
+            " want to try them first.
+            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+          endif
+        endif
+    " }
+
+    " Setup Bundle Support {
+        " The next three lines ensure that the ~/.vim/bundle/ system works
+        filetype off
+        set rtp+=~/.vim/bundle/vundle
+        call vundle#rc()
+    " }
+
+    " Add an UnBundle command {
+    function! UnBundle(arg, ...)
+      let bundle = vundle#config#init_bundle(a:arg, a:000)
+      call filter(g:vundle#bundles, 'v:val["name_spec"] != "' . a:arg . '"')
+    endfunction
+
+    com! -nargs=+         UnBundle
+    \ call UnBundle(<args>)
+    " }
+
+" }
+
+" Bundles {
+
+    " Deps {
+        Bundle 'gmarik/vundle'
+        Bundle 'MarcWeber/vim-addon-mw-utils'
+        Bundle 'tomtom/tlib_vim'
+        if executable('ag')
+            Bundle 'mileszs/ack.vim'
+            let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+        elseif executable('ack-grep')
+            let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+            Bundle 'mileszs/ack.vim'
+        elseif executable('ack')
+            Bundle 'mileszs/ack.vim'
+        endif
+    " }
+
+    " In your .vimrc.before.local file
+    " list only the plugin groups you will use
+    if !exists('g:spf13_bundle_groups')
+        let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
+    endif
+
+    " To override all the included bundles, add the following to your
+    " .vimrc.bundles.local file:
+    "   let g:override_spf13_bundles = 1
+    if !exists("g:override_spf13_bundles")
+
+    " General {
+        if count(g:spf13_bundle_groups, 'general')
+            Bundle 'scrooloose/nerdtree'
+            Bundle 'altercation/vim-colors-solarized'
+            Bundle 'spf13/vim-colors'
+            Bundle 'tpope/vim-surround'
+            Bundle 'tpope/vim-repeat'
+            Bundle 'rhysd/conflict-marker.vim'
+            Bundle 'jiangmiao/auto-pairs'
+            Bundle 'ctrlpvim/ctrlp.vim'
+            Bundle 'tacahiroy/ctrlp-funky'
+            Bundle 'terryma/vim-multiple-cursors'
+            Bundle 'vim-scripts/sessionman.vim'
+            Bundle 'matchit.zip'
+            if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
+                Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+            elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
+                Bundle 'Lokaltog/vim-powerline'
+            else
+                Bundle 'vim-airline/vim-airline'
+                Bundle 'vim-airline/vim-airline-themes'
+            endif
+            Bundle 'powerline/fonts'
+            Bundle 'bling/vim-bufferline'
+            Bundle 'easymotion/vim-easymotion'
+            Bundle 'jistr/vim-nerdtree-tabs'
+            Bundle 'flazz/vim-colorschemes'
+            Bundle 'mbbill/undotree'
+            Bundle 'nathanaelkane/vim-indent-guides'
+            if !exists('g:spf13_no_views')
+                Bundle 'vim-scripts/restore_view.vim'
+            endif
+            Bundle 'mhinz/vim-signify'
+            Bundle 'tpope/vim-abolish.git'
+            Bundle 'osyo-manga/vim-over'
+            Bundle 'kana/vim-textobj-user'
+            Bundle 'kana/vim-textobj-indent'
+            Bundle 'gcmt/wildfire.vim'
+        endif
+    " }
+
+    " Writing {
+        if count(g:spf13_bundle_groups, 'writing')
+            Bundle 'reedes/vim-litecorrect'
+            Bundle 'reedes/vim-textobj-sentence'
+            Bundle 'reedes/vim-textobj-quote'
+            Bundle 'reedes/vim-wordy'
+        endif
+    " }
+
+    " General Programming {
+        if count(g:spf13_bundle_groups, 'programming')
+            " Pick one of the checksyntax, jslint, or syntastic
+            Bundle 'scrooloose/syntastic'
+            Bundle 'tpope/vim-fugitive'
+            Bundle 'mattn/webapi-vim'
+            Bundle 'mattn/gist-vim'
+            Bundle 'scrooloose/nerdcommenter'
+            Bundle 'tpope/vim-commentary'
+            Bundle 'godlygeek/tabular'
+            Bundle 'luochen1990/rainbow'
+            if executable('ctags')
+                Bundle 'majutsushi/tagbar'
+            endif
+        endif
+    " }
+
+    " Python {
+        if count(g:spf13_bundle_groups, 'python')
+            " Pick either python-mode or pyflakes & pydoc
+            Bundle 'klen/python-mode'
+            Bundle 'yssource/python.vim'
+            Bundle 'python_match.vim'
+            Bundle 'pythoncomplete'
+        endif
+    " }
+
+    " Javascript {
+        if count(g:spf13_bundle_groups, 'javascript')
+            Bundle 'elzr/vim-json'
+            Bundle 'groenewege/vim-less'
+            Bundle 'pangloss/vim-javascript'
+            Bundle 'briancollins/vim-jst'
+            Bundle 'kchmck/vim-coffee-script'
+        endif
+    " }
+
+    endif
+
+" }
+

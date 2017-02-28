@@ -1,10 +1,15 @@
 "setting start==================================================================
-echo ">^.^<"
+"echo ">^.^<"
 "关闭vi兼容模式.
 set nocompatible
 let mapleader=','
 "加载插件.
-source e:/somegit/MyConfig/VimThing/vimrc.bundles
+"if filereadable(expand("~/.vimrc.bundles"))
+    "source ~/.vimrc.bundles
+"endif
+if filereadable(expand("e:/somegit/MyConfig/VimThing/vimrc.bundles"))
+    source e:/somegit/MyConfig/VimThing/vimrc.bundles
+endif
 " 检测文件类型
 filetype on
 " 针对不同的文件类型采用不同的缩进格式
@@ -54,6 +59,8 @@ set hidden
 if &term =~ '256color'
 	set t_ut=
 endif
+"默认背景为黑色.
+set background=dark
 "setting end====================================================================
 
 "autocmd start==================================================================
@@ -78,7 +85,7 @@ nnoremap <c-m> :bp<CR>
 "空格打开与关闭折叠.
 nnoremap <space> za<cr>
 "normal模式下;为:.
-nnoremap ; :
+"nnoremap ; :
 "查找时，使其居中.
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -87,6 +94,10 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 "去掉搜索高亮.
 nnoremap <silent><leader>/ :nohl<cr>
+nnoremap <buffer> <leader>x 04x <esc>
+noremap <leader>bg :call ToggleBG()<CR>
+inoremap jk <esc>
+inoremap <esc> <nop>
 "maps end=======================================================================
 
 "language start=================================================================
@@ -118,3 +129,15 @@ autocmd BufNewFile,BufRead *.js, *.html, *.css
 "tips start=====================================================================
 "tips end=======================================================================
 
+"func start=====================================================================
+"切换背景颜色.
+function! ToggleBG()
+    let s:tbg = &background
+    " Inversion
+    if s:tbg == "dark"
+        set background=light
+    else
+        set background=dark
+    endif
+endfunction
+"func end=======================================================================
