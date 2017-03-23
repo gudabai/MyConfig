@@ -72,6 +72,8 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'suan/vim-instant-markdown'
 
+Plug 'majutsushi/tagbar'
+
 call plug#end()
 "bundle list end================================================================
 
@@ -119,19 +121,6 @@ map <leader>o :BufExplorer<cr>
 ino <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
 snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
 
-if has('gui_running')
-	set guioptions-=T
-	set guioptions-=r
-	set background=dark
-	set t_Co=256
-	"colorscheme solarized
-	colorscheme desert
-	"colorscheme molokai
-	"F5切换明暗系.
-	call togglebg#map("<F5>")
-else
-	colorscheme Zenburn
-endif
 "bundle setting end=============================================================
 
 "======
