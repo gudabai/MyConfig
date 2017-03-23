@@ -1,91 +1,39 @@
 "setting start==================================================================
-"echo ">^.^<"
 "关闭vi兼容模式.
 set nocompatible
-let mapleader=','
 "加载插件.
-"if filereadable(expand("~/.vimrc.bundles"))
-    "source ~/.vimrc.bundles
-"endif
-if filereadable(expand("e:/somegit/MyConfig/VimThing/vimrc.bundles"))
-    source e:/somegit/MyConfig/VimThing/vimrc.bundles
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
 endif
 " 检测文件类型
 filetype on
-" 针对不同的文件类型采用不同的缩进格式
-filetype indent on
-" 允许插件
-filetype plugin on
-" 启动自动补全
-filetype plugin indent on
 "设置行号.
 set nu
 "设置相对行号.
 set relativenumber
-"拼写检查.
-"set spell
 "中文兼容.
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
-"字体及大小.
-set guifont=Andale_Mono:h12,Menlo:h12,Consolas:h12,Courier_New:h12
 "设置分屏在下，在右.
 set splitbelow
 set splitright
-"底层两行.
-set cmdheight=1
-"搜索时忽略大小写.
-set ignorecase
-"搜索时高亮.
-"set hlsearch
-"开启语法高亮.
-syntax on
-"开启换行.
-set wrap
-"拒绝拼写检查.
-set nospell
-"unix格式.
-set fileformat=unix
 "显示当前行.
 set cursorline
-"不要交换文件.
-set noswapfile
 "在Vim外被修改自动载入.
 set autoread
 "至少保留行数.
-set scrolloff=10
-"当一个buffer被丢弃时自动隐藏.
-set hidden
+set scrolloff=7
 "防止tmux下背景色显示异常.
 if &term =~ '256color'
 	set t_ut=
 endif
-"默认背景为黑色.
-set background=dark
 "setting end====================================================================
-
-"autocmd start==================================================================
-"Python文件保存时调用语法检查.
-"autocmd BufWritePost *.py call Flake8()
-"autocmd end====================================================================
 
 "maps start=====================================================================
 "快捷编辑vimrc并应用.
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-"简易切换窗口.
-nnoremap <c-j> <c-w><c-j>
-nnoremap <c-k> <c-w><c-k>
-nnoremap <c-l> <c-w><c-l>
-nnoremap <c-h> <c-w><c-h>
-"快捷保存.
-nnoremap <leader>w :w<cr>
-"设置切换Buffer快捷键,值得商榷.
-nnoremap <c-n> :bn<CR>
-nnoremap <c-m> :bp<CR>
 "空格打开与关闭折叠.
 nnoremap <space> za<cr>
-"normal模式下;为:.
-"nnoremap ; :
 "查找时，使其居中.
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -114,7 +62,7 @@ autocmd BufNewFile,BufRead *.py  set tabstop=4
 \ foldlevel=99
 let python_highlight_all=1
 "自动运行当前脚本.
-"autocmd BufRead *.py nnoremap <buffer> <F4> :w<cr>:!/usr/bin/env python % <cr>
+autocmd BufRead *.py nnoremap <buffer> <F5> :w<cr>:!/usr/bin/env python % <cr>
 "<-----Python
 
 "JavaScript----->

@@ -1,162 +1,139 @@
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if has('win32') || has('win64')
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+"bundle list start==============================================================
+filetype off
+"使用vim-plug管理.
+call plug#begin('~/.vim/plugged')
 
-          " Be nice and check for multi_byte even if the config requires
-          " multi_byte support most of the time
-          if has("multi_byte")
-            " Windows cmd.exe still uses cp850. If Windows ever moved to
-            " Powershell as the primary terminal, this would be utf-8
-            set termencoding=cp850
-            " Let Vim use utf-8 internally, because many scripts require this
-            set encoding=utf-8
-            setglobal fileencoding=utf-8
-            " Windows has traditionally used cp1252, so it's probably wise to
-            " fallback into cp1252 instead of eg. iso-8859-15.
-            " Newer Windows files might contain utf-8 or utf-16 LE so we might
-            " want to try them first.
-            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-          endif
-        endif
-    " }
+"平滑滚动.
+Plug 'yonchu/accelerated-smooth-scroll'
 
-    " Setup Bundle Support {
-        " The next three lines ensure that the ~/.vim/bundle/ system works
-        filetype off
-        set rtp+=~/.vim/bundle/vundle
-        call vundle#rc()
-    " }
+"git改变记录与暂存. [c; ]c; ,hs; ,hu; ,hp;
+Plug 'airblade/vim-gitgutter'
 
-    " Add an UnBundle command {
-    function! UnBundle(arg, ...)
-      let bundle = vundle#config#init_bundle(a:arg, a:000)
-      call filter(g:vundle#bundles, 'v:val["name_spec"] != "' . a:arg . '"')
-    endfunction
+Plug 'tpope/vim-fugitive'
 
-    com! -nargs=+         UnBundle
-    \ call UnBundle(<args>)
-    " }
+"目录树.
+Plug 'scrooloose/nerdtree'
 
-" }
+"目前最强的状态条.
+Plug 'vim-airline/vim-airline'
 
-" Bundles {
+"Python代码提示.
+Plug 'davidhalter/jedi-vim'
 
-    " Deps {
-        Bundle 'gmarik/vundle'
-        Bundle 'MarcWeber/vim-addon-mw-utils'
-        Bundle 'tomtom/tlib_vim'
-        if executable('ag')
-            Bundle 'mileszs/ack.vim'
-            let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-        elseif executable('ack-grep')
-            let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-            Bundle 'mileszs/ack.vim'
-        elseif executable('ack')
-            Bundle 'mileszs/ack.vim'
-        endif
-    " }
+"snippets.
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'scrooloose/snipmate-snippets'
 
-    " In your .vimrc.before.local file
-    " list only the plugin groups you will use
-    if !exists('g:spf13_bundle_groups')
-        let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
-    endif
+"主题.
+Plug 'jnurmine/Zenburn'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'fugalh/desert.vim'
+Plug 'vim-scripts/peaksea'
+Plug 'wesgibbs/vim-irblack'
+Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 
-    " To override all the included bundles, add the following to your
-    " .vimrc.bundles.local file:
-    "   let g:override_spf13_bundles = 1
-    if !exists("g:override_spf13_bundles")
+"搜索.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-    " General {
-        if count(g:spf13_bundle_groups, 'general')
-            Bundle 'scrooloose/nerdtree'
-            Bundle 'altercation/vim-colors-solarized'
-            Bundle 'spf13/vim-colors'
-            Bundle 'tpope/vim-surround'
-            Bundle 'tpope/vim-repeat'
-            Bundle 'rhysd/conflict-marker.vim'
-            Bundle 'jiangmiao/auto-pairs'
-            Bundle 'ctrlpvim/ctrlp.vim'
-            Bundle 'tacahiroy/ctrlp-funky'
-            Bundle 'terryma/vim-multiple-cursors'
-            Bundle 'vim-scripts/sessionman.vim'
-            Bundle 'matchit.zip'
-            if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
-                Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-            elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
-                Bundle 'Lokaltog/vim-powerline'
-            else
-                Bundle 'vim-airline/vim-airline'
-                Bundle 'vim-airline/vim-airline-themes'
-            endif
-            Bundle 'powerline/fonts'
-            Bundle 'bling/vim-bufferline'
-            Bundle 'easymotion/vim-easymotion'
-            Bundle 'jistr/vim-nerdtree-tabs'
-            Bundle 'flazz/vim-colorschemes'
-            Bundle 'mbbill/undotree'
-            Bundle 'nathanaelkane/vim-indent-guides'
-            if !exists('g:spf13_no_views')
-                Bundle 'vim-scripts/restore_view.vim'
-            endif
-            Bundle 'mhinz/vim-signify'
-            Bundle 'tpope/vim-abolish.git'
-            Bundle 'osyo-manga/vim-over'
-            Bundle 'kana/vim-textobj-user'
-            Bundle 'kana/vim-textobj-indent'
-            Bundle 'gcmt/wildfire.vim'
-        endif
-    " }
+"检错.
+Plug 'w0rp/ale'
 
-    " Writing {
-        if count(g:spf13_bundle_groups, 'writing')
-            Bundle 'reedes/vim-litecorrect'
-            Bundle 'reedes/vim-textobj-sentence'
-            Bundle 'reedes/vim-textobj-quote'
-            Bundle 'reedes/vim-wordy'
-        endif
-    " }
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
-    " General Programming {
-        if count(g:spf13_bundle_groups, 'programming')
-            " Pick one of the checksyntax, jslint, or syntastic
-            Bundle 'scrooloose/syntastic'
-            Bundle 'tpope/vim-fugitive'
-            Bundle 'mattn/webapi-vim'
-            Bundle 'mattn/gist-vim'
-            Bundle 'scrooloose/nerdcommenter'
-            Bundle 'tpope/vim-commentary'
-            Bundle 'godlygeek/tabular'
-            Bundle 'luochen1990/rainbow'
-            if executable('ctags')
-                Bundle 'majutsushi/tagbar'
-            endif
-        endif
-    " }
+"注释 gcap
+Plug 'tpope/vim-commentary'
 
-    " Python {
-        if count(g:spf13_bundle_groups, 'python')
-            " Pick either python-mode or pyflakes & pydoc
-            Bundle 'klen/python-mode'
-            Bundle 'yssource/python.vim'
-            Bundle 'python_match.vim'
-            Bundle 'pythoncomplete'
-        endif
-    " }
+Plug 'terryma/vim-multiple-cursors'
 
-    " Javascript {
-        if count(g:spf13_bundle_groups, 'javascript')
-            Bundle 'elzr/vim-json'
-            Bundle 'groenewege/vim-less'
-            Bundle 'pangloss/vim-javascript'
-            Bundle 'briancollins/vim-jst'
-            Bundle 'kchmck/vim-coffee-script'
-        endif
-    " }
+Plug 'terryma/vim-expand-region'
 
-    endif
+Plug 'junegunn/goyo.vim'
 
-" }
+Plug 'maxbrunsfeld/vim-yankstack'
 
+Plug 'honza/vim-snippets'
+
+Plug 'rking/ag.vim'
+
+Plug 'jlanzarotta/bufexplorer'
+
+call plug#end()
+"bundle list end================================================================
+
+"bundle setting start===========================================================
+"nerdtree----->
+"只剩下NERDTree时自动关闭.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let g:NERDTreeWinPos = "right"
+let NERDTreeShowHidden=0
+"忽略*.pyc和*~
+let NERDTreeIgnore = ['\.pyc$', '\~$', '__pycache__']
+let g:NERDTreeWinSize=35
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+"<-----nerdtree
+
+"vim-airline----->
+"打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+"我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+"<-----vim-airline
+
+
+let g:multi_cursor_next_key="\<C-s>"
+
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
+
+let g:gitgutter_enabled=0
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+nmap <c-p> <Plug>yankstack_substitute_older_paste
+nmap <c-P> <Plug>yankstack_substitute_newer_paste
+
+let g:bufExplorerDefaultHelp=0
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerFindActive=1
+let g:bufExplorerSortBy='name'
+map <leader>o :BufExplorer<cr>
+
+ino <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
+snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
+
+if has('gui_running')
+	set guioptions-=T
+	set guioptions-=r
+	set background=dark
+	set t_Co=256
+	"colorscheme solarized
+	colorscheme desert
+	"colorscheme molokai
+	"F5切换明暗系.
+	call togglebg#map("<F5>")
+else
+	colorscheme Zenburn
+endif
+"bundle setting end=============================================================
+
+"======
+"老插件，暂不用.
+"文件及tag搜索.
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'vim-syntastic/syntastic'
+
+"功能暂时用不上.
+"Plug 'godlygeek/tabular'
+"Plug 'nvie/vim-flake8' "用autopep8.
+"Plug 'yegappan/mru'
+
+"可以一玩儿.
+"Plug 'amix/vim-zenroom2'
