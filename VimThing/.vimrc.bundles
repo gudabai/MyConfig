@@ -133,6 +133,7 @@ snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
 "Plug 'godlygeek/tabular'
 "Plug 'nvie/vim-flake8' "用autopep8.
 "Plug 'yegappan/mru'
+"Plug 'jistr/vim-nerdtree-tabs'
 
 "可以一玩儿.
 "Plug 'amix/vim-zenroom2'
