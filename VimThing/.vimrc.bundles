@@ -62,6 +62,16 @@ Plug 'rking/ag.vim'
 
 Plug 'jlanzarotta/bufexplorer'
 
+Plug 'kien/rainbow_parentheses.vim'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'python-mode/python-mode'
+
+Plug 'plasticboy/vim-markdown'
+
+Plug 'suan/vim-instant-markdown'
+
 call plug#end()
 "bundle list end================================================================
 
