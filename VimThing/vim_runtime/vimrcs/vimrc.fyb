@@ -1,10 +1,6 @@
 "setting start==================================================================
 "关闭vi兼容模式.
 set nocompatible
-"加载插件.
-if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
-endif
 " 检测文件类型
 filetype on
 "设置行号.

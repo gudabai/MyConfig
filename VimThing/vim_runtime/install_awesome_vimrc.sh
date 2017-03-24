@@ -1,11 +1,13 @@
-cd ~/.vim_runtime
+cd ~/.vim
+mv vimrcs/ ~/.vim/vimrcs
 
-echo 'set runtimepath+=~/.vim_runtime
+echo 'set runtimepath+=~/.vim
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vimrc.fyb
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+source ~/.vim/vimrcs/basic.vim
+source ~/.vim/vimrcs/vimrc.bundles
+source ~/.vim/vimrcs/filetypes.vim
+source ~/.vim/vimrcs/extended.vim
+source ~/.vim/vimrcs/vimrc.fyb
 
 ' > ~/.vimrc
 
