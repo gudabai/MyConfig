@@ -121,6 +121,11 @@ map <leader>o :BufExplorer<cr>
 ino <c-j> <c-r>=snipMate#TriggerSnippet()<cr>
 snor <c-j> <esc>i<right><c-r>=snipMate#TriggerSnippet()<cr>
 
+
+" Colorscheme
+set background=dark
+colorscheme gruvbox
+
 "bundle setting end=============================================================
 
 "======
