@@ -23,10 +23,12 @@ source ~/.zshrc
 
 # tmux
 brew install tmux
-git clone git://github.com/xuxiaodong/tmuxen.git
-cd tmuxen && ./install-tmuxen && cd ~
 
 # node
 brew install node
 
 # python
+# download miniconda
+alias conda="~/miniconda3/bin/conda"
+alias activate="source ~/miniconda3/bin/activate"
+alias deactivate="source ~/miniconda3/bin/deactivate"

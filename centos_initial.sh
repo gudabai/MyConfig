@@ -1,7 +1,5 @@
 # oh-my-zsh.
 yum install -y zsh
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-chsh -s /bin/zsh
 # gudabai-config.
 git clone https://github.com/gudabai/MyConfig
 ## gudabai-vim-config.
