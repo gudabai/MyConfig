@@ -1,8 +1,0 @@
-[
-	{ "keys": ["ctrl+u"], "command": "move", "args": {"by": "pages", "forward": false} },
-	{ "keys": ["ctrl+d"], "command": "move", "args": {"by": "pages", "forward": true} },
-	{ "keys": ["enter"], "command": "find_next" },
-	{ "keys": ["f3"], "command": "find_under_expand" },
-	{ "keys": ["ctrl+k", "f3"], "command": "find_under_expand_skip" },
-	
-]
