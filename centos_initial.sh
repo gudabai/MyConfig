@@ -1,7 +1,5 @@
 # oh-my-zsh.
 yum install -y zsh
-# gudabai-config.
-git clone https://github.com/gudabai/MyConfig
 ## gudabai-vim-config.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

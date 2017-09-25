@@ -1,5 +1,5 @@
 mkdir ~/.vim
-cp vimrcs/ ~/.vim/vimrcs
+cp -r vimrcs/ ~/.vim/vimrcs
 
 echo 'set runtimepath+=~/.vim
 
