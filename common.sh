@@ -95,3 +95,28 @@ function vim_delegate()
     ' > ~/.vimrc
     echo "Installed the Ultimate Vim configuration successfully! Enjoy :-)"
 }
+
+function jekyll()
+{
+    
+}
+
+function get_platform()
+{
+    platform=`uname -s`
+    if [ platform = ]
+
+}
+
+# ---
+# cn origin.
+
+function npm_cn_origin()
+{
+
+}
+
+function ruby_cn_origin()
+{
+
+}
