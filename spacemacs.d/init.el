@@ -328,6 +328,8 @@ you should place your code here."
                                 (setq flycheck-checker 'python-pylint
                                       flycheck-checker-error-threshold 900
                                       flycheck-pylintrc "~/.pylintrc")))
+  (require 'pyvenv)
+  (pyvenv-activate  "~/miniconda3/envs/python27")
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))

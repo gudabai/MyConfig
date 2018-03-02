@@ -1,1 +1,0 @@
-(global-linum-mode t)
