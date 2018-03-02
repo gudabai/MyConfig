@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
-;; Author: 崔舜华 <cuishunhua@cuishunhuadeMacBook-Pro.local>
+;; Author: guerbai<guerbai8@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst guerbai-packages
-  '()
+  '(youdao-dictionary)
   "The list of Lisp packages required by the guerbai layer.
 
 Each entry is either:
@@ -58,10 +58,12 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-;; (defun guerbai/init-youdao-dictionary ()
-;;   (use-package youdao-dictionary
-;;     :defer t
-;;   ))
+(defun guerbai/init-youdao-dictionary ()
+  (use-package youdao-dictionary
+    :defer t
+    :init
+    (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
+  ))
 
 
 ;;; packages.el ends here
