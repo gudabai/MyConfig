@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; See the Spacemacs documentation and FAQs for instructions on how to implement
+;; see the Spacemacs documentation and FAQs for instructions on how to implement
 ;; a new layer:
 ;;
 ;;   SPC h SPC layers RET
@@ -29,8 +29,10 @@
 
 ;;; Code:
 
-(defconst guerbai-packages
-  '(youdao-dictionary)
+(defconst guerbai-packages '(
+    youdao-dictionary
+    elpy
+    )
   "The list of Lisp packages required by the guerbai layer.
 
 Each entry is either:
@@ -65,5 +67,13 @@ Each entry is either:
     (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
   ))
 
+(defun guerbai/init-elpy ()
+  (use-package elpy
+    :defer t
+    :init
+    (progn
+      (elpy-enable)
+      (setq elpy-rpc-backend "jedi"))
+    ))
 
 ;;; packages.el ends here
