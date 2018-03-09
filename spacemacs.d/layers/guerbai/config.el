@@ -1,16 +1,11 @@
-;; (add-hook 'python-mode-hook
-;;           (lambda ()
-            ;; (set (make-local-variable 'company-backends) '(company-anaconda))))
+;; remove produce of #file#
+(setq create-lockfiles nil)
 
-;; (require 'cl)
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-;; (defun my/python-mode-hook ()
-;;   (add-to-list 'company-backends 'company-jedi))
+(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(
+                                            ("8mail" "guerbai8@gmail.com")
+                                            ("ut" "# -*- coding: utf-8 -*-")
+                                            ))
 
-;; (add-hook 'python-mode-hook 'my/python-mode-hook)
-;; (fset 'guerbai/answer-yes
-;;    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([121 return 134217848 14] 0 "%d")) arg)))
-
-;; (fset 'guerbai/press-return
-;;       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([return 134217848 14 14] 0 "%d")) arg)))
+;; decrease prompt type.
+(fset 'yes-or-no-p 'y-or-n-p)

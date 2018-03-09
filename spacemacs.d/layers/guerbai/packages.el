@@ -76,4 +76,6 @@ Each entry is either:
       (setq elpy-rpc-backend "jedi"))
     ))
 
+(load-file "~/.spacemacs.d/layers/guerbai/my-org.el")
+
 ;;; packages.el ends here

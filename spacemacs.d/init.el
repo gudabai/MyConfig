@@ -17,8 +17,10 @@
                                        themes-megapack
                                        (spacemacs-layouts :variables layouts-enable-autosave nil
                                                           layouts-autosave-delay 300)
+                                       javascript
                                        guerbai
-                                       )
+                                       ranger
+                                       ) ;
    dotspacemacs-additional-packages '()
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '(
@@ -199,26 +201,15 @@
 
 (defun dotspacemacs/user-init ()
   (setq configuration-layer-elpa-archives
-		'(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-		  ("org-cn"   . "http://elpa.emacs-china.org/org/")
-		  ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "http://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
   (setq tramp-ssh-controlmaster-options
-		"-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   (setenv "WORKON_HOME" "~/miniconda3/envs")
   )
 
-(defun dotspacemacs/user-config ()
-  (setq create-lockfiles nil)
-  ;; (add-hook 'python-mode-hook (lambda ()
-  ;;                               (flycheck-mode 1)
-  ;;                               (semantic-mode 1)
-  ;;                               (setq flycheck-checker 'python-pylint
-  ;;                                     flycheck-checker-error-threshold 900
-  ;;                                     flycheck-pylintrc "~/.pylintrc")))
-  (require 'pyvenv)
-  (pyvenv-activate  "~/miniconda3/envs/python27")
-  (setq-default flycheck-flake8rc "~/.flake8")
-  )
+(defun dotspacemacs/user-config ())
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
